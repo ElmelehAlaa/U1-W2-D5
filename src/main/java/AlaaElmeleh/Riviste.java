@@ -10,6 +10,8 @@ public class Riviste implements Pubblicazione {
         private int numeroPagine;
         private TipoPeriodicita periodicita;
 
+        private String autore;
+
 
     public Riviste(long codiceISBN, String titolo, int annoPubblicazione, int numeroPagine, TipoPeriodicita periodicita) {
         setCodiceISBN(codiceISBN);
@@ -43,6 +45,11 @@ public class Riviste implements Pubblicazione {
     @Override
     public int getAnnoPubblicazione() {
         return annoPubblicazione;
+    }
+
+    @Override
+    public String getAutore() {
+        return autore;
     }
 
     @Override

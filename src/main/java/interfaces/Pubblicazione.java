@@ -6,6 +6,8 @@ public interface Pubblicazione {
     String getTitolo();
     int getAnnoPubblicazione();
 
+    String getAutore();
+
 
     void setAnnoPubblicazione(int annoPubblicazione);
 

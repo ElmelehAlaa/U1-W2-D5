@@ -45,6 +45,11 @@ public class Libri implements Pubblicazione {
     }
 
     @Override
+    public String getAutore() {
+        return autore;
+    }
+
+    @Override
     public void setAnnoPubblicazione(int annoPubblicazione) {
         if (String.valueOf(annoPubblicazione).length() != 4) {
             throw new IllegalArgumentException("L'anno di pubblicazione deve contenere esattamente 4 cifre.");

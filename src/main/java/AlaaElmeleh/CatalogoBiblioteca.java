@@ -75,7 +75,34 @@ return;
 
         System.out.println("Nessun elemento trovato con il codice ISBN " + codiceISBN);
     }
+    public Pubblicazione cercaPerCodiceISBN(long codiceISBN) {
+        for (Libri libro : libri) {
+            if (libro.getCodiceISBN() == codiceISBN) {
+                return libro;
+            }
+        }
+
+        for (Riviste rivista : riviste) {
+            if (rivista.getCodiceISBN() == codiceISBN) {
+                return rivista;
+            }
+        }
+
+        return null;
+    }
+    public List<Libri> cercaPerAutore(String autore) {
+        List<Libri> risultati = new ArrayList<>();
+
+        for (Libri libro : libri) {
+            if (libro.getAutore().equalsIgnoreCase(autore)) {
+                risultati.add(libro);
+            }
+        }
+
+        return risultati;
+    }
 }
+
 
 
 

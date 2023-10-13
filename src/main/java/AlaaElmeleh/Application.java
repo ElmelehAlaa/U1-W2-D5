@@ -18,6 +18,9 @@ public class Application {
             System.out.println("2. Cerca per anno di pubblicazione");
             System.out.println("3. Esci");
             System.out.println("4. MostraCatalogo");
+            System.out.println("5. Rimuovi per codice isbn");
+            System.out.println("6. ricerca Elemento per isbn");
+            System.out.println("7. Ricerca elemento per autore");
 
             int scelta = scanner.nextInt();
             scanner.nextLine();
@@ -113,6 +116,12 @@ public class Application {
                             }
                         }
                     }break;
+                case 3:
+                    continua =false;
+
+                    System.out.println("Programma terminato");
+
+                        break;
                 case 4:
                     catalogo.mostraCatalogo();
                     break;
@@ -124,8 +133,39 @@ public class Application {
                     catalogo.rimuoviPerCodiceISBN(codiceISBNDaRimuovere);
                     System.out.println("Elemento eliminato dal Catalogo!");;
                     break;
+                case 6:
+                    System.out.println("Inserisci il codice ISBN dell'elemento da cercare:");
+                    long codiceISBNDaCercare = scanner.nextLong();
+                    scanner.nextLine();
 
-                default:System.err.println("Scelta non valida. Inserisci un numero da 1 a 8.");
+                    Pubblicazione elementoPerCodiceISBN = catalogo.cercaPerCodiceISBN(codiceISBNDaCercare);
+                    if (elementoPerCodiceISBN != null) {
+                        System.out.println("Elemento trovato:");
+                        if (elementoPerCodiceISBN instanceof Libri) {
+                            System.out.println("Libro: " + elementoPerCodiceISBN);
+                        } else if (elementoPerCodiceISBN instanceof Riviste) {
+                            System.out.println("Rivista: " + elementoPerCodiceISBN);
+                        }
+                    } else {
+                        System.out.println("Nessun elemento trovato con il codice ISBN " + codiceISBNDaCercare);
+                    }
+                    break;
+                case 7:
+                    System.out.println("Inserisci il nome dell'autore da cercare:");
+                    String autoreDaCercare = scanner.nextLine();
+
+                    List<Libri> libriPerAutore = catalogo.cercaPerAutore(autoreDaCercare);
+                    if (!libriPerAutore.isEmpty()) {
+                        System.out.println("Libri scritti da " + autoreDaCercare + ":");
+                        for (Libri libro : libriPerAutore) {
+                            System.out.println("Libro: " + libro);
+                        }
+                    } else {
+                        System.out.println("Nessun libro trovato scritto da " + autoreDaCercare);
+                    }
+                    break;
+
+                default:System.err.println("Scelta non valida. Inserisci un numero da 1 a 7.");
                     break;
     }
 }}}
