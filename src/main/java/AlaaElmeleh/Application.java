@@ -5,6 +5,8 @@ import interfaces.Pubblicazione;
 import java.util.List;
 import java.util.Scanner;
 
+import static AlaaElmeleh.CatalogoBiblioteca.stampa;
+
 public class Application {
 
     public static void main(String[] args) {
@@ -58,6 +60,7 @@ public class Application {
             try {
                 Libri libro = new Libri(codiceISBN, titolo, annoPubblicazione, numeroPagine, autore, genere);
                 catalogo.aggiungiLibro(libro);
+               stampa(catalogo);
                 System.out.println("Libro aggiunto al catalogo.");
             } catch (IllegalArgumentException e) {
                 System.err.println("Errore nell'aggiunta del libro: " + e.getMessage());
@@ -168,4 +171,5 @@ public class Application {
                 default:System.err.println("Scelta non valida. Inserisci un numero da 1 a 7.");
                     break;
     }
-}}}
+}
+    }}

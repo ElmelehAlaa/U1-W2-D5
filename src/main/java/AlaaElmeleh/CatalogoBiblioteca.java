@@ -105,13 +105,32 @@ return;
 
         return risultati;
     }
-    public static void Stampa(List<CatalogoBiblioteca>catalogo){
-        List<Pubblicazione> catalogoLetto = new ArrayList<>();
-        catalogoLetto.addAll(libri);
-        catalogoLetto.addAll(riviste);
-        File file = new File("src/output.text");
+
+
+    public  List<Pubblicazione> getCatalogo() {
+        List<Pubblicazione> catalogoCompleto = new ArrayList<>();
+        catalogoCompleto.addAll(libri);
+        catalogoCompleto.addAll(riviste);
+        return catalogoCompleto;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    /////////////////METODO STAMPA
+    public static void stampa (CatalogoBiblioteca catalogo) {
+        List<Pubblicazione> catalogoLetto = catalogo.getCatalogo();
+        File file = new File("src/output.txt");
         try{
-            for (int i=0 ; i<catalogo.size();i++){
+            for (int i=0 ; i<catalogoLetto.size();i++){
                 FileUtils.writeStringToFile(file,catalogoLetto.get(i).getTitolo()+ "@"+ catalogoLetto.get(i).getAutore()+"@"+catalogoLetto.get(i).getAnnoPubblicazione()+"@"+catalogoLetto.get(i).getCodiceISBN(),true);
             }
             String contenuto = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
