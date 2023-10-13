@@ -8,7 +8,18 @@ public class Riviste implements Pubblicazione {
         private String titolo;
         private int annoPubblicazione;
         private int numeroPagine;
-        private Enum TipoPeriodicita ;
+        private TipoPeriodicita periodicita;
+
+
+    public Riviste(long codiceISBN, String titolo, int annoPubblicazione, int numeroPagine, TipoPeriodicita periodicita) {
+        setCodiceISBN(codiceISBN);
+        this.titolo=titolo;
+        setAnnoPubblicazione(annoPubblicazione);
+        this.numeroPagine=numeroPagine;
+        this.periodicita= periodicita;
+    }
+
+
 
 
     @Override

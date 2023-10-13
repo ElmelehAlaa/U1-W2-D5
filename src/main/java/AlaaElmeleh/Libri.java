@@ -28,19 +28,11 @@ public class Libri implements Pubblicazione {
 
     @Override
     public void setCodiceISBN(long codiceISBN) {
-        try{
-            if (codiceISBN <= 0) {
-                throw new IllegalArgumentException("Il codice ISBN deve essere un valore positivo.");
-            }
-            else{
-                setCodiceISBN(codiceISBN);
-            }
-        }catch (IllegalArgumentException e){
-            System.err.println(e.getMessage());
+        if (codiceISBN <= 0) {
+            throw new IllegalArgumentException("Il codice ISBN deve essere un valore positivo.");
         }
-
+        this.codiceISBN = codiceISBN;
     }
-
     @Override
     public String getTitolo() {
         return titolo;
@@ -54,17 +46,10 @@ public class Libri implements Pubblicazione {
 
     @Override
     public void setAnnoPubblicazione(int annoPubblicazione) {
-        try{
-            if(String.valueOf(annoPubblicazione).length() !=4){
-                throw new IllegalArgumentException("L'anno di pubblicazione è incoerente");
-            }
-            else{
-                setAnnoPubblicazione(annoPubblicazione);
-            }
-        }catch (IllegalArgumentException e){
-            System.err.println(e.getMessage());
+        if (String.valueOf(annoPubblicazione).length() != 4) {
+            throw new IllegalArgumentException("L'anno di pubblicazione deve contenere esattamente 4 cifre.");
         }
-
+        this.annoPubblicazione = annoPubblicazione;
     }
 
     @Override
