@@ -1,14 +1,18 @@
 package AlaaElmeleh;
 
 import interfaces.Pubblicazione;
+import org.apache.commons.io.FileUtils;
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CatalogoBiblioteca {
-    private List<Libri> libri = new ArrayList<>();
-    private List<Riviste> riviste = new ArrayList<>();
+    private static List<Libri> libri = new ArrayList<>();
+    private static List<Riviste> riviste = new ArrayList<>();
 
 
     ////////////////// Metodo per aggiungere un libro al catalogo////////////
@@ -100,6 +104,21 @@ return;
         }
 
         return risultati;
+    }
+    public static void Stampa(List<CatalogoBiblioteca>catalogo){
+        List<Pubblicazione> catalogoLetto = new ArrayList<>();
+        catalogoLetto.addAll(libri);
+        catalogoLetto.addAll(riviste);
+        File file = new File("src/output.text");
+        try{
+            for (int i=0 ; i<catalogo.size();i++){
+                FileUtils.writeStringToFile(file,catalogoLetto.get(i).getTitolo()+ "@"+ catalogoLetto.get(i).getAutore()+"@"+catalogoLetto.get(i).getAnnoPubblicazione()+"@"+catalogoLetto.get(i).getCodiceISBN(),true);
+            }
+            String contenuto = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+            System.out.println("nel file ho trovato: " + contenuto);
+        }catch (IOException ex){
+            ex.getMessage();
+        }
     }
 }
 
