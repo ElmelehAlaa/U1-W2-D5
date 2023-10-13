@@ -1,5 +1,8 @@
 package AlaaElmeleh;
 
+import interfaces.Pubblicazione;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Application {
@@ -7,6 +10,20 @@ public class Application {
     public static void main(String[] args) {
         CatalogoBiblioteca catalogo = new CatalogoBiblioteca();
         Scanner scanner = new Scanner(System.in);
+        boolean continua = true;
+
+        while (continua) {
+            System.out.println("Seleziona un'opzione:");
+            System.out.println("1. Aggiungi nuovo elemento al catalogo");
+            System.out.println("2. Cerca per anno di pubblicazione");
+            System.out.println("3. Esci");
+            System.out.println("4. MostraCatalogo");
+
+            int scelta = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (scelta) {
+                case 1:
 
         System.out.println("Inserisci il tipo di pubblicazione (1 per Libro, 2 per Rivista):");
         int tipoPubblicazione = scanner.nextInt();
@@ -77,5 +94,38 @@ public class Application {
         else {
             System.err.println("Tipo di pubblicazione non valido. Inserisci 1 per Libro o 2 per Rivista.");
         }
+        break;
+                case 2:
+                    System.out.println("Inserisci l'anno di pubblicazione da cercare:");
+                    int annoDaCercare = scanner.nextInt();
+                    scanner.nextLine();
+                    List<Pubblicazione> risultati = catalogo.cercaPerAnnoPubblicazione(annoDaCercare);
+
+                    if (risultati.isEmpty()) {
+                        System.out.println("Nessuna pubblicazione trovata per l'anno " + annoDaCercare);
+                    } else {
+                        System.out.println("Pubblicazioni trovate per l'anno " + annoDaCercare + ":");
+                        for (Pubblicazione pubblicazione : risultati) {
+                            if (pubblicazione instanceof Libri) {
+                                System.out.println("Libro: " + pubblicazione);
+                            } else if (pubblicazione instanceof Riviste) {
+                                System.out.println("Rivista: " + pubblicazione);
+                            }
+                        }
+                    }break;
+                case 4:
+                    catalogo.mostraCatalogo();
+                    break;
+                case 5:
+                    System.out.println("Inserisci il codice ISBN dell'elemento da rimuovere:");
+                    long codiceISBNDaRimuovere = scanner.nextLong();
+                    scanner.nextLine();
+
+                    catalogo.rimuoviPerCodiceISBN(codiceISBNDaRimuovere);
+                    System.out.println("Elemento eliminato dal Catalogo!");;
+                    break;
+
+                default:System.err.println("Scelta non valida. Inserisci un numero da 1 a 8.");
+                    break;
     }
-}
+}}}
