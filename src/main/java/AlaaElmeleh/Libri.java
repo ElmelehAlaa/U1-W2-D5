@@ -28,6 +28,16 @@ public class Libri implements Pubblicazione {
 
     @Override
     public void setCodiceISBN(long codiceISBN) {
+        try{
+            if (codiceISBN <= 0) {
+                throw new IllegalArgumentException("Il codice ISBN deve essere un valore positivo.");
+            }
+            else{
+                setCodiceISBN(codiceISBN);
+            }
+        }catch (IllegalArgumentException e){
+            System.err.println(e.getMessage());
+        }
 
     }
 
